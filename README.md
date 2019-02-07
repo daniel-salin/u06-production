@@ -1,6 +1,19 @@
-<h1>u06-recipe-app-frontend - Daniel Salin<h1>
+<h1>u06-recipe-app-frontend - Daniel Salin</h1>
 
 Live version available at: <a href="#">N/A </a>
+
+Git Remote for Project: https://github.com/chas-academy/06-recipe-app-frontend-daniel-salin.git
+Git Remote for Build Test via Pages: https://github.com/chas-academy/u06-production/
+
+<h2>For build purposes<h2>
+Base-href currently set to u06-production for testing. This is NOT the where the final page will be deployed.
+Make sure to check remote before pushing.
+
+<ul>
+    <li>ng build --prod --base-href "https://daniel-salin.github.io/u06-production/"</li>
+    <li>ngh --dir dist/recipe-app</li>
+</ul>
+
 
 # Uppgiften
 
