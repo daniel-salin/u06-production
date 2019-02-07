@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 
 // Recipe Components 
 
-
-// Recipe Services 
-
 // Recipe Routing
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipesListComponent } from './recipes-list.component';
@@ -17,7 +14,7 @@ import { RecipesListComponent } from './recipes-list.component';
   declarations: [RecipesListComponent],
   imports: [
     CommonModule,
-    RecipesRoutingModule
+    RecipesRoutingModule,
   ]
 })
 export class RecipesModule { }
