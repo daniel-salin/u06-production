@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from './recipe.service';
+import { observable } from 'rxjs';
+import { Recipes } from './recipe.model';
+
 
 
 @Component({
@@ -8,11 +11,20 @@ import { RecipeService } from './recipe.service';
   styleUrls: ['./recipes-list.component.css']
 })
 export class RecipesListComponent implements OnInit {
+  recipes: Recipes[];
+  query: string;
+  observable: string;
+
 
   constructor(private recipeService: RecipeService) { }
    
   ngOnInit() {
-   this.recipeService.getRecipes();
+    
+  }
+
+  searchRecipes() {
+    this.observable = this.recipeService.getRecipes(this.query)
+    .subscribe(data => this.recipes = data.hits);  
   }
 
 }

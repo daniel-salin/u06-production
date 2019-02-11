@@ -8,7 +8,6 @@ const routes: Routes = [
   {path: "", redirectTo: "/recipes", pathMatch: 'full' },
   
   {path: "**", component:NotFoundComponent },
-
 ];
 
 @NgModule({

@@ -1,10 +1,19 @@
-<h1>Recipies List</h1>
-<div class="jumbotron">
+<h1>Recipes List</h1>
+<div class="container">
+<input [(ngModel)]="query" placeholder="Search for recipe" />
+<button class="btn" (click)="searchRecipes()">Search</button>
+</div>
+
+<div class="container">
+
+<div *ngIf="recipes" class="card">
+ 
     <ul>
-        <li>
-            <div class="card">
-                <h3>Recipe Item {{ title }}</h3>
-            </div>
+        <li *ngFor="let item of recipes">
+                <h5>{{ item.recipe.label }}</h5>
+                <img src="{{ item.recipe.image }}" alt="">
+                <a href="{{ item.recipe.url}}">{{item.recipe.label}}</a>
         </li>
     </ul>
+</div>
 </div>
