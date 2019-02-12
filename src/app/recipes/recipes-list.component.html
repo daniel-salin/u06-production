@@ -10,10 +10,11 @@
  
     <ul>
         <li *ngFor="let item of recipes">
-                <h5>{{ item.recipe.label }}</h5>
-                <img src="{{ item.recipe.image }}" alt="">
-                <a href="{{ item.recipe.url}}">{{item.recipe.label}}</a>
+                <h5><a [routerLink]="['/recipe', item.id]" routerLinkActive="active">{{ item.title }}</a></h5>
+                <img src="{{ item.image }}" alt="">
+                <a href="{{ item.id}}">{{item.label}}</a>
         </li>
     </ul>
 </div>
 </div>
+

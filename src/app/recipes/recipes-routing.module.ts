@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { RecipesListComponent } from './recipes-list.component';
+import { RecipesDetailsComponent } from './recipes-details.component';
 
 
 const recipesRoutes: Routes = [
   
-  {path: "recipes", component:RecipesListComponent}
+  {path: "recipe", component:RecipesListComponent},
+  {path: "recipe/:id", component:RecipesDetailsComponent}
 
 ];
 

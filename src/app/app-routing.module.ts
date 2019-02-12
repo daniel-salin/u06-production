@@ -5,7 +5,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RecipesModule } from './recipes/recipes.module';
 
 const routes: Routes = [
-  {path: "", redirectTo: "/recipes", pathMatch: 'full' },
+  {path: "", redirectTo: "/recipe", pathMatch: 'full' },
   
   {path: "**", component:NotFoundComponent },
 ];

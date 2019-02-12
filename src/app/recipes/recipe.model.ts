@@ -1,6 +1,9 @@
 export class Recipes {
     constructor(
-        public label: string
+        public id: string, 
+        public title: string, 
+        public image: string, 
+        public url: string
     ) {}
 
 }

@@ -7,10 +7,11 @@ import { FormsModule } from '@angular/forms';
 // Recipe Routing
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipesListComponent } from './recipes-list.component';
+import { RecipesDetailsComponent } from './recipes-details.component';
 
 
 @NgModule({
-  declarations: [RecipesListComponent],
+  declarations: [RecipesListComponent, RecipesDetailsComponent],
   imports: [
     CommonModule,
     RecipesRoutingModule,
