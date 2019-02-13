@@ -1,4 +1,13 @@
 <div class="container">
+  <div class="row">
+    <div *ngFor="let item of health | keyvalue" class="class col s6 m3 l3">
+      <label>
+        <input type="checkbox" [(ngModel)]="item.value.check" />
+        <span>{{ item.key }}</span>
+      </label>
+    </div>
+  </div>
+
   <input [(ngModel)]="query" placeholder="Search for recipe" />
   <button class="btn" (click)="searchRecipes()">Search</button>
 </div>
