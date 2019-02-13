@@ -11,43 +11,71 @@ export class RecipesListComponent implements OnInit {
   query: string;
   recipes: Recipes[];
   health: Object = {
-    "alcohol free": { check: false, param: "alcohol-free" },
-    "celery free": { check: false, param: "celery-free" },
-    "crustacean free": { check: false, param: "crustacean-free" },
-    "dairy free": { check: false, param: "dairy-free" },
-    "egg free": { check: false, param: "egg-free" },
-    "fish free": { check: false, param: "fish-free" },
-    "gluten free": { check: false, param: "gluten-free" },
-    "kidney friendly": { check: false, param: "kidney-free" },
-    kosher: { check: false, param: "kosher" },
-    "low potassium": { check: false, param: "low-potassium" },
-    "lupine free": { check: false, param: "lupine-free" },
-    "mustard free": { check: false, param: "mustard-free" },
-    "no oil added": { check: false, param: "No-oil-added" },
-    "low sugar": { check: false, param: "low-sugar" },
-    paleo: { check: false, param: "paleo" },
-    "peanut free": { check: false, param: "peanut-free" },
-    pescatarian: { check: false, param: "pescatarian" },
-    "pork free": { check: false, param: "pork-free" },
-    "red meat free": { check: false, param: "red-meat-free" },
-    "sesame free": { check: false, param: "sesame-free" },
-    "shellfish free": { check: false, param: "shellfish-free" },
-    "soy free": { check: false, param: "soy-free" },
-    "sugar conscious": { check: false, param: "sugar-conscious" },
-    "tree nut free": { check: false, param: "tree-nut-free" },
-    vegan: { check: false, param: "vegan" },
-    vegetarian: { check: false, param: "vegetarian" },
-    "wheat free": { check: false, param: "wheat-free" }
+    "alcohol free": { check: false, param: "Alcohol-Free" },
+    "celery free": { check: false, param: "Celery-Free" },
+    "crustacean free": { check: false, param: "Crustacean-Free" },
+    "dairy free": { check: false, param: "Dairy-Free" },
+    "egg free": { check: false, param: "Egg-Free" },
+    "fish free": { check: false, param: "Fish-Free" },
+    "gluten free": { check: false, param: "Gluten-Free" },
+    "kidney friendly": { check: false, param: "Kidney-Free" },
+    "kosher": { check: false, param: "Kosher" },
+    "low potassium": { check: false, param: "Low-Potassium" },
+    "lupine free": { check: false, param: "Lupine-Free" },
+    "mustard free": { check: false, param: "Mustard-Free" },
+    "no oil added": { check: false, param: "No-Oil-Added" },
+    "low sugar": { check: false, param: "Low-Sugar" },
+    "paleo": { check: false, param: "Paleo" },
+    "peanut free": { check: false, param: "Peanut-Free" },
+    "pescatarian": { check: false, param: "Pescatarian" },
+    "pork free": { check: false, param: "Pork-Free" },
+    "red meat free": { check: false, param: "Red-Meat-Free" },
+    "sesame free": { check: false, param: "Sesame-Free" },
+    "shellfish free": { check: false, param: "Shellfish-Free" },
+    "soy free": { check: false, param: "Soy-Free" },
+    "sugar conscious": { check: false, param: "Sugar-Conscious" },
+    "tree nut free": { check: false, param: "Tree-Nut-Free" },
+    "vegan": { check: false, param: "Vegan" },
+    "vegetarian": { check: false, param: "Vegetarian" },
+    "wheat free": { check: false, param: "Wheat-Free" }
   };
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit() {}
 
+  /**
+   *  This filter methods triggers when the health option checkbox
+   *  is pressed. If the recipes object is not empty it then
+   *  iterates over each recipe and checks if it contains 
+   *  a match for the checkbox filter. If found it sets the display
+   *   used in the card class in the template to hide. 
+   */
+  filter(event: any) {
+    let filterLabel = event.target.value;
+    if (event.target.checked && this.recipes != undefined) {
+      this.recipes.forEach(element => {
+        if (element.healthLabels.includes(filterLabel)) {
+          element.display = "hide";
+        }
+      });
+    } else if (!event.target.checked && this.recipes != undefined) {
+      this.recipes.forEach(element => {
+        if (element.healthLabels.includes(filterLabel)) {
+          element.display = "show";
+        }
+      });
+    }
+  }
+
+  /**
+   * If returned the recipe id is built by stripping away
+   * the everything that precedes the identifier in the 
+   * end of the uri
+   */
   searchRecipes() {
     const RECIPES = [];
-    this.recipeService.queryRecipes(this.query)
-    .subscribe(data => {
+    this.recipeService.queryRecipes(this.query).subscribe(data => {
       data.hits.forEach(element => {
         let uri = element.recipe.uri;
         let uriSplit = uri.split("_");
@@ -55,10 +83,27 @@ export class RecipesListComponent implements OnInit {
         let title = element.recipe.label;
         let image = element.recipe.image;
         let url = element.recipe.url;
-        RECIPES.push(new Recipes(id, title, image, url));
+        let healthLabels = element.recipe.healthLabels;
+        let dietLabels = element.recipe.dietLabels;
+        let ingredientLines = element.recipe.ingredientLines;
+        let calories = element.recipe.calories;
+        let display = "show";
+        RECIPES.push(
+          new Recipes(
+            id,
+            title,
+            image,
+            url,
+            healthLabels,
+            dietLabels,
+            ingredientLines,
+            calories,
+            display
+          )
+        );
       });
       this.recipes = RECIPES;
-      console.log(this.recipes);
+      
     });
   }
 }

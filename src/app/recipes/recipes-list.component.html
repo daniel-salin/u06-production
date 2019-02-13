@@ -1,24 +1,28 @@
-<div class="container">
+<div *ngIf="recipes" class="container">
   <div class="row">
+      <h5>Filter Results</h5>
     <div *ngFor="let item of health | keyvalue" class="class col s6 m3 l3">
       <label>
-        <input type="checkbox" [(ngModel)]="item.value.check" />
+        <input type="checkbox" value="{{ item.value.param }}" [(ngModel)]="item.value.check" (change)="filter($event)" />
         <span>{{ item.key }}</span>
       </label>
     </div>
-  </div>
-
-  <input [(ngModel)]="query" placeholder="Search for recipe" />
-  <button class="btn" (click)="searchRecipes()">Search</button>
+</div>
+</div>
+<div class="container">
+    <input [(ngModel)]="query" placeholder="Search for recipe" />
+    <button class="btn" (click)="searchRecipes()">Search</button>
 </div>
 
 <div *ngIf="recipes" class="row">
-  <div *ngFor="let item of recipes" class="card small col s12 m6 l2">
-    <div class="card-image">
-      <img src="{{ item.image }}" alt="">
-    </div>
-    <div class="card-content">
-      <a [routerLink]="['/recipe', item.id]" routerLinkActive="active">{{ item.title }}</a>
+  <div  *ngFor="let item of recipes">
+    <div class="card small col s12 m6 l2 {{ item.display }}">
+      <div class="card-image">
+        <img src="{{ item.image }}" alt="">
+      </div>
+      <div class="card-content">
+        <a [routerLink]="['/recipe', item.id]" routerLinkActive="active">{{ item.title }}</a>
+      </div>
     </div>
   </div>
 </div>
