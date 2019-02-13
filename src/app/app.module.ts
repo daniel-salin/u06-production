@@ -19,7 +19,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RecipesModule,
+    RecipesModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

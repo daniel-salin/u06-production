@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RecipeService } from "./recipe.service";
 import { Recipes } from "./recipe.model";
-import { TargetLocator } from "selenium-webdriver";
+import * as $ from 'jquery'
 
 @Component({
   selector: "app-recipes-list",
@@ -51,7 +51,9 @@ export class RecipesListComponent implements OnInit {
 
   constructor(private recipeService: RecipeService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    $('.progress').hide();
+  }
 
   /**
    *  This filter methods triggers when the health option checkbox
@@ -87,6 +89,7 @@ export class RecipesListComponent implements OnInit {
    * end of the uri
    */
   searchRecipes() {
+    $('.progress').show()
     const RECIPES = [];
     this.recipeService.queryRecipes(this.query).subscribe(data => {
       data.hits.forEach(element => {
@@ -116,6 +119,7 @@ export class RecipesListComponent implements OnInit {
         );
       });
       this.recipes = RECIPES;
+      $('.progress').hide();
     });
   }
 }
