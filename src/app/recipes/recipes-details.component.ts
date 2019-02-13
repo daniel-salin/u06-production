@@ -31,7 +31,12 @@ export class RecipesDetailsComponent implements OnInit {
       let title = data[0].label;
       let image = data[0].image;
       let url = data[0].url;
-      RECIPE.push(new Recipes(id, title, image, url));
+      let healthLabels = data[0].healthLabels;
+      let dietLabels = data[0].dietLabels;
+      let ingredientLines = data[0].ingredientLines;
+      let calories = data[0].calories;
+      let display = data[0].display;
+      RECIPE.push(new Recipes(id, title, image, url, healthLabels, dietLabels, ingredientLines, calories, display));
       return RECIPE;
     });
     this.recipe = RECIPE;

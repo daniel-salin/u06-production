@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RecipeService } from "./recipe.service";
 import { Recipes } from "./recipe.model";
+import { TargetLocator } from "selenium-webdriver";
 
 @Component({
   selector: "app-recipes-list",
@@ -10,6 +11,14 @@ import { Recipes } from "./recipe.model";
 export class RecipesListComponent implements OnInit {
   query: string;
   recipes: Recipes[];
+  diet: Object = {
+    balanced: { check: false, param: "Balanced" },
+    "high fiber": { check: false, param: "High-Fiber" },
+    "high protein": { check: false, param: "High-Protein" },
+    "low carb": { check: false, param: "Low-Carb" },
+    "low fat": { check: false, param: "Low-Fat" },
+    "high sodium": { check: false, param: "Low-Sodium" }
+  };
   health: Object = {
     "alcohol free": { check: false, param: "Alcohol-Free" },
     "celery free": { check: false, param: "Celery-Free" },
@@ -47,21 +56,25 @@ export class RecipesListComponent implements OnInit {
   /**
    *  This filter methods triggers when the health option checkbox
    *  is pressed. If the recipes object is not empty it then
-   *  iterates over each recipe and checks if it contains 
+   *  iterates over each recipe and checks if it contains
    *  a match for the checkbox filter. If found it sets the display
-   *   used in the card class in the template to hide. 
+   *   used in the card class in the template to hide.
    */
-  filter(event: any) {
+  filter(event: any,filterType: string) {
     let filterLabel = event.target.value;
     if (event.target.checked && this.recipes != undefined) {
       this.recipes.forEach(element => {
-        if (element.healthLabels.includes(filterLabel)) {
+        let toBeFiltered =
+          filterType === "health" ? element.healthLabels : element.dietLabels;
+        if (toBeFiltered.includes(filterLabel)) {
           element.display = "hide";
         }
       });
     } else if (!event.target.checked && this.recipes != undefined) {
       this.recipes.forEach(element => {
-        if (element.healthLabels.includes(filterLabel)) {
+        let toBeFiltered =
+          filterType === "health" ? element.healthLabels : element.dietLabels;
+        if (toBeFiltered.includes(filterLabel)) {
           element.display = "show";
         }
       });
@@ -69,8 +82,8 @@ export class RecipesListComponent implements OnInit {
   }
 
   /**
-   * If returned the recipe id is built by stripping away
-   * the everything that precedes the identifier in the 
+   * If get-request goes through, the recipe id is built by stripping away
+   * the everything that precedes the identifier in the
    * end of the uri
    */
   searchRecipes() {
@@ -103,7 +116,6 @@ export class RecipesListComponent implements OnInit {
         );
       });
       this.recipes = RECIPES;
-      
     });
   }
 }

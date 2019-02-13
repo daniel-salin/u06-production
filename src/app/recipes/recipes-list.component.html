@@ -1,27 +1,39 @@
 <div *ngIf="recipes" class="container">
   <div class="row">
-      <h5>Filter Results</h5>
+    <h6>Filter by health option</h6>
     <div *ngFor="let item of health | keyvalue" class="class col s6 m3 l3">
       <label>
-        <input type="checkbox" value="{{ item.value.param }}" [(ngModel)]="item.value.check" (change)="filter($event)" />
+        <input type="checkbox" value="{{ item.value.param }}" [(ngModel)]="item.value.check" (change)="filter($event, 'health')" />
         <span>{{ item.key }}</span>
       </label>
     </div>
-</div>
-</div>
-<div class="container">
-    <input [(ngModel)]="query" placeholder="Search for recipe" />
-    <button class="btn" (click)="searchRecipes()">Search</button>
+  </div>
+
+  <h6>Filter by diet</h6>
+  <div class="row">
+    <div *ngFor="let item of diet | keyvalue" class="col s4 m2 l2">
+      <label>
+        <input type="checkbox" value="{{ item.value.param }}" [(ngModel)]="item.value.check" (change)="filter($event, 'diet')" />
+        <span>{{ item.key }}</span>
+      </label>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="recipes" class="row">
-  <div  *ngFor="let item of recipes">
-    <div class="card small col s12 m6 l2 {{ item.display }}">
-      <div class="card-image">
-        <img src="{{ item.image }}" alt="">
-      </div>
-      <div class="card-content">
-        <a [routerLink]="['/recipe', item.id]" routerLinkActive="active">{{ item.title }}</a>
+<div class="container">
+  <input [(ngModel)]="query" placeholder="Search for recipe" />
+  <button class="btn" (click)="searchRecipes()">Search</button>
+</div>
+<div class="container">
+  <div *ngIf="recipes" class="row">
+    <div *ngFor="let item of recipes">
+      <div class="card small col s12 m6 l2 {{ item.display }}">
+        <div class="card-image">
+          <img src="{{ item.image }}" alt="">
+        </div>
+        <div class="card-content">
+          <a [routerLink]="['/recipe', item.id]" routerLinkActive="active">{{ item.title }}</a>
+        </div>
       </div>
     </div>
   </div>
