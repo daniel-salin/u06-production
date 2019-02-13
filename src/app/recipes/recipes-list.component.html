@@ -1,20 +1,15 @@
-<h1>Recipes List</h1>
 <div class="container">
-<input [(ngModel)]="query" placeholder="Search for recipe" />
-<button class="btn" (click)="searchRecipes()">Search</button>
+  <input [(ngModel)]="query" placeholder="Search for recipe" />
+  <button class="btn" (click)="searchRecipes()">Search</button>
 </div>
 
-<div class="container">
-
-<div *ngIf="recipes" class="card">
- 
-    <ul>
-        <li *ngFor="let item of recipes">
-                <h5><a [routerLink]="['/recipe', item.id]" routerLinkActive="active">{{ item.title }}</a></h5>
-                <img src="{{ item.image }}" alt="">
-                <a href="{{ item.id}}">{{item.label}}</a>
-        </li>
-    </ul>
+<div *ngIf="recipes" class="row">
+  <div *ngFor="let item of recipes" class="card small col s12 m6 l2">
+    <div class="card-image">
+      <img src="{{ item.image }}" alt="">
+    </div>
+    <div class="card-content">
+      <a [routerLink]="['/recipe', item.id]" routerLinkActive="active">{{ item.title }}</a>
+    </div>
+  </div>
 </div>
-</div>
-
