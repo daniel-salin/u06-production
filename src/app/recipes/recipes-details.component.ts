@@ -4,8 +4,6 @@ import { ActivatedRoute } from "@angular/router";
 import { RecipeService } from "./recipe.service";
 import { Recipes } from "./recipe.model";
 
-
-
 @Component({
   selector: "app-recipes-details",
   templateUrl: "./recipes-details.component.html",
@@ -26,7 +24,7 @@ export class RecipesDetailsComponent implements OnInit {
   ngOnInit() {
     const RECIPE = [];
     this.recipeService.fetchRecipe(this.recipeId).subscribe(data => {
-
+      
       let id = this.recipeId;
       let title = data[0].label;
       let image = data[0].image;
