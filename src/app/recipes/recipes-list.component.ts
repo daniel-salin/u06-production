@@ -68,7 +68,7 @@ export class RecipesListComponent implements OnInit {
       this.recipes.forEach(element => {
         let toBeFiltered =
           filterType === "health" ? element.healthLabels : element.dietLabels;
-        if (toBeFiltered.includes(filterLabel)) {
+        if (!toBeFiltered.includes(filterLabel)) {
           element.display = "hide";
         }
       });
@@ -76,7 +76,7 @@ export class RecipesListComponent implements OnInit {
       this.recipes.forEach(element => {
         let toBeFiltered =
           filterType === "health" ? element.healthLabels : element.dietLabels;
-        if (toBeFiltered.includes(filterLabel)) {
+        if (!toBeFiltered.includes(filterLabel)) {
           element.display = "show";
         }
       });
