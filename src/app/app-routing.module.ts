@@ -3,9 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RecipesModule } from './recipes/recipes.module';
+import { ListsModule } from './lists/lists.module';
+
 
 const routes: Routes = [
+
   {path: "", redirectTo: "/recipe", pathMatch: 'full' },
+  {path: "recipe", redirectTo: "/recipe", pathMatch: 'full' },
+  {path: "lists", redirectTo: "/lists", pathMatch: 'full' },
   
   {path: "**", component:NotFoundComponent },
 ];
@@ -13,7 +18,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    RecipesModule
+    RecipesModule,
+    ListsModule
   ],
   exports: [RouterModule]
 })

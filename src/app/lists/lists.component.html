@@ -1,0 +1,18 @@
+<div class="container">
+  <div *ngIf="lists" class="row">
+    <div *ngFor="let item of lists">
+      <div class="card small col s12 m6 l2 {{ item.id }}">
+        <div class="card-content">
+          <h5>{{ item.title }}</h5>
+          <ul>
+            <li *ngFor="let item of lists.recipes">
+              <p>{{ item }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h3>Lists will be displayed here</h3>
+<router-outlet></router-outlet>

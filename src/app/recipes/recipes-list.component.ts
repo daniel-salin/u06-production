@@ -12,7 +12,7 @@ export class RecipesListComponent implements OnInit {
   query: string;
   recipes: Recipes[];
   diet: Object = {
-    balanced: { check: false, param: "Balanced" },
+    "balanced": { check: false, param: "Balanced" },
     "high fiber": { check: false, param: "High-Fiber" },
     "high protein": { check: false, param: "High-Protein" },
     "low carb": { check: false, param: "Low-Carb" },
