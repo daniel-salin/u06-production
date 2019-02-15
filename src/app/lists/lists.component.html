@@ -1,18 +1,12 @@
-<div class="container">
-  <div *ngIf="lists" class="row">
-    <div *ngFor="let item of lists">
-      <div class="card small col s12 m6 l2 {{ item.id }}">
-        <div class="card-content">
-          <h5>{{ item.title }}</h5>
-          <ul>
-            <li *ngFor="let item of lists.recipes">
-              <p>{{ item }}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<div *ngIf="list; else noList" class="container">
+  <h4>{{ list[0].title }}</h4>
+  <ul *ngFor="let item of list[0].recipes">
+    <li> <a [routerLink]="['/recipe', item.id]" routerLinkActive="active">{{ item.title }}</a></li>
+  </ul>
 </div>
-<h3>Lists will be displayed here</h3>
+
+<ng-template #noList>
+  <h4>Your collected recipes goes here</h4>
+</ng-template>
+
 <router-outlet></router-outlet>

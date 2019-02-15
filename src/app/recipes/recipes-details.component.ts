@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import {} from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { RecipeService } from "./recipe.service";
+import { ListService } from "./../lists/list.service";
 import { Recipes } from "./recipe.model";
 
 @Component({
@@ -16,7 +16,8 @@ export class RecipesDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private listService: ListService
   ) {
     this.route.params.subscribe(params => (this.recipeId = params));
   }
@@ -24,7 +25,6 @@ export class RecipesDetailsComponent implements OnInit {
   ngOnInit() {
     const RECIPE = [];
     this.recipeService.fetchRecipe(this.recipeId).subscribe(data => {
-      
       let id = this.recipeId;
       let title = data[0].label;
       let image = data[0].image;
@@ -34,9 +34,25 @@ export class RecipesDetailsComponent implements OnInit {
       let ingredientLines = data[0].ingredientLines;
       let calories = data[0].calories;
       let display = data[0].display;
-      RECIPE.push(new Recipes(id, title, image, url, healthLabels, dietLabels, ingredientLines, calories, display));
+      RECIPE.push(
+        new Recipes(
+          id,
+          title,
+          image,
+          url,
+          healthLabels,
+          dietLabels,
+          ingredientLines,
+          calories,
+          display
+        )
+      );
       return RECIPE;
     });
     this.recipe = RECIPE;
+  }
+
+  saveRecipe() {
+    this.listService.addRecipe(this.recipe);
   }
 }
