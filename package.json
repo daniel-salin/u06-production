@@ -4,12 +4,16 @@
   "scripts": {
     "ng": "ng",
     "start": "npm-run-all --parallel serve server",
+    "tpublish": "npm run tbuild && npm run tdeploy",
     "serve": "ng serve -o",
     "server": "json-server --watch edamam.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "tbuild": "ng build --prod --base-href 'https://daniel-salin.github.io/u06-production/recipe'",
+    "tdeploy": "ngh --dir dist/recipe-app"
+    
   },
   "private": true,
   "dependencies": {
