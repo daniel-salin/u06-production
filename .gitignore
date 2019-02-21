@@ -45,3 +45,9 @@ Thumbs.db
 
 # API info
 api.ts
+
+#Test component
+src/app/test
+src/app/test/*
+
+.gitignore
