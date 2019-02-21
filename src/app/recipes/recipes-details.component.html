@@ -12,7 +12,7 @@
       </li>
     </ul>
     <a href="{{ recipe[0].url}}" aria-label="Go to external site for cooking instructions">Cooking instructions</a>
-    <div class="section">
+    <div *ngIf="loggedIn" class="section">
       <a (click)="saveRecipe()" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
       <p class="m2">
     </div>
