@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from './user.service'
 import { TokenService } from './token.service'
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: "app-login",
@@ -14,7 +16,12 @@ export class LoginComponent implements OnInit {
     password: null
   };
 
-  constructor(private userService: UserService, private tokenService: TokenService) {}
+  constructor(
+    private userService: UserService, 
+    private tokenService: TokenService, 
+    private route: Router,
+    private authService: AuthService
+    ) {}
 
   ngOnInit() {}
 
@@ -25,8 +32,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  handleResponse(data) {
+  handleResponse(data) { 
     this.tokenService.handleToken(data.access_token);
+    this.authService.changeStatus(true);
+    this.route.navigateByUrl('/user');
   }
 
   handleError(error) {

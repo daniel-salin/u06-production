@@ -3,10 +3,11 @@
     <a href="#" class="brand-logo left">TastyTreats </a>
     <ul id="" class="right">
       <li><a routerLink="/recipe">Search</a></li>
-      <li><a routerLink="/lists">Lists</a></li>
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/register">Register</a></li>
-      <li><a routerLink="/user">User</a></li>
+      <li *ngIf="!loggedIn"><a routerLink="/login">Login</a></li>
+      <li *ngIf="!loggedIn"><a routerLink="/register">Register</a></li>
+      <li *ngIf="loggedIn"><a routerLink="/lists">Lists</a></li>
+      <li *ngIf="loggedIn"><a routerLink="/user">User</a></li>
+      <li *ngIf="loggedIn"><a routerLink="" (click)="logout()">Logout</a></li>
     </ul>
   </div>
 </nav>

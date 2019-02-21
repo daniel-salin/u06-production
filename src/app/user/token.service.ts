@@ -13,7 +13,6 @@ export class TokenService {
 
   handleToken(token) {
     this.set(token);
-    console.log(this.isValid());
   }
 
   get() {

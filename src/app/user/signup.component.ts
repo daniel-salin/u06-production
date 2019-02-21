@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './user.service'
+import { Router } from '@angular/router';
+import { TokenService } from './token.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,19 +18,24 @@ export class SignupComponent implements OnInit {
     password_confirmation: null
   };
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private tokenService: TokenService, private route: Router) {}
 
   ngOnInit() {}
 
   onSubmit() {
     if(this.signup['password' ]=== this.signup['password_confirmation']) {
       this.userService.register(this.signup).subscribe(
-        data => console.log(data),
+        data => this.handleResponse(data),
         error => this.handleError(error)
       );
     } else {
       this.error = "Your passwords do not match";
     }
+  }
+
+  handleResponse(data) { 
+    this.tokenService.handleToken(data.access_token);
+    this.route.navigateByUrl('/user');
   }
 
   handleError(error) {
