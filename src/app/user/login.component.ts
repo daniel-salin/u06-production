@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { UserService } from './user.service'
+import { TokenService } from './token.service'
 
 @Component({
   selector: "app-login",
@@ -13,15 +14,19 @@ export class LoginComponent implements OnInit {
     password: null
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private userService: UserService, private tokenService: TokenService) {}
 
   ngOnInit() {}
 
   onSubmit() {
-    this.http.post('http://recipeapi.test/api/login', this.login).subscribe(
-      data => console.log(data),
+    this.userService.login(this.login).subscribe(
+      data => this.handleResponse(data),
       error => this.handleError(error)
     );
+  }
+
+  handleResponse(data) {
+    this.tokenService.handleToken(data.access_token);
   }
 
   handleError(error) {

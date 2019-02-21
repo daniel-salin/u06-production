@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { UserService } from './user.service'
 
 @Component({
   selector: 'app-signup',
@@ -16,13 +16,13 @@ export class SignupComponent implements OnInit {
     password_confirmation: null
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {}
 
   onSubmit() {
     if(this.signup['password' ]=== this.signup['password_confirmation']) {
-      this.http.post('http://recipeapi.test/api/register', this.signup).subscribe(
+      this.userService.register(this.signup).subscribe(
         data => console.log(data),
         error => this.handleError(error)
       );
