@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from './user.service'
-import { TokenService } from './token.service'
-import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { UserService } from "./user.service";
+import { TokenService } from "./token.service";
+import { Router } from "@angular/router";
+import { AuthService } from "./auth.service";
+import * as $ from "jquery";
 
 @Component({
   selector: "app-login",
@@ -17,29 +18,35 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(
-    private userService: UserService, 
-    private tokenService: TokenService, 
+    private userService: UserService,
+    private tokenService: TokenService,
     private route: Router,
     private authService: AuthService
-    ) {}
+  ) {}
 
-  ngOnInit() {}
-
-  onSubmit() {
-    this.userService.login(this.login).subscribe(
-      data => this.handleResponse(data),
-      error => this.handleError(error)
-    );
+  ngOnInit() {
+    $(".progress").hide();
   }
 
-  handleResponse(data) { 
+  onSubmit() {
+    $(".progress").show();
+    this.userService
+      .login(this.login)
+      .subscribe(
+        data => this.handleResponse(data),
+        error => this.handleError(error)
+      );
+  }
+
+  handleResponse(data) {
+    $(".progress").hide();
     this.tokenService.handleToken(data.access_token);
     this.authService.changeStatus(true);
-    this.route.navigateByUrl('/user');
+    this.route.navigateByUrl("/user");
   }
 
   handleError(error) {
+    $(".progress").hide();
     this.error = error.error.error;
   }
-
 }

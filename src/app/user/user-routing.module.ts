@@ -8,7 +8,7 @@ import { AfterLoginService } from './after-login.service';
 
 const userRoutes: Routes = [
   { path: "login", component: LoginComponent, canActivate: [BeforeLoginService] },
-  { path: "register", component: SignupComponent, canActivate: [AfterLoginService] },
+  { path: "register", component: SignupComponent, canActivate: [BeforeLoginService] },
   { path: "user", component: UserComponent, canActivate: [AfterLoginService] }
 ];
 
