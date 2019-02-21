@@ -7,6 +7,7 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
+  error: string;
   login: Object = {
     email: null,
     password: null
@@ -17,6 +18,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    console.log(this.login);
+    this.http.post('http://recipeapi.test/api/login', this.login).subscribe(
+      data => console.log(data),
+      error => this.handleError(error)
+    );
   }
+
+  handleError(error) {
+    this.error = error.error.error;
+  }
+
 }
