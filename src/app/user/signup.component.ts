@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
 
   handleResponse(data) {
     $(".progress").hide();
-    this.tokenService.handleToken(data.access_token);
+    this.tokenService.handleToken(data.access_token, data.uid);
     this.authService.changeStatus(true);
     this.route.navigateByUrl("/user");
   }

@@ -4,7 +4,7 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from "@angular/router";
-import { TokenService } from './token.service';
+import { TokenService } from "./token.service";
 
 @Injectable({
   providedIn: "root"
@@ -18,7 +18,7 @@ export class AfterLoginService implements CanActivate {
     | import("@angular/router").UrlTree
     | import("rxjs").Observable<boolean | import("@angular/router").UrlTree>
     | Promise<boolean | import("@angular/router").UrlTree> {
-      return this.tokenService.loggedIn();
+    return this.tokenService.loggedIn();
   }
 
   constructor(private tokenService: TokenService) {}

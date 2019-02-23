@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+ import { Component, OnInit } from "@angular/core";
 import { RecipeService } from "./recipe.service";
 import { Recipes } from "./recipe.model";
 import * as $ from 'jquery'

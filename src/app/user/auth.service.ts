@@ -12,6 +12,6 @@ changeStatus(value: boolean) {
   this.loggedIn.next(value);
 }
 
-  constructor(private tokenService: TokenService ) { }
+  constructor(private tokenService: TokenService) { }
 
 }

@@ -4,6 +4,7 @@ import { RecipeService } from "./recipe.service";
 import { ListService } from "./../lists/list.service";
 import { Recipes } from "./recipe.model";
 import { AuthService } from '../user/auth.service';
+import { Lists } from '../lists/list.model';
 
 @Component({
   selector: "app-recipes-details",
@@ -13,6 +14,7 @@ import { AuthService } from '../user/auth.service';
 export class RecipesDetailsComponent implements OnInit {
   recipe;
   recipeId;
+  lists: Lists[];
   observable: string;
   loggedIn: boolean;
 
@@ -24,9 +26,18 @@ export class RecipesDetailsComponent implements OnInit {
   ) {
     this.route.params.subscribe(params => (this.recipeId = params));
   }
-
+  
   ngOnInit() {
     this.authService.authStatus.subscribe(value => this.loggedIn = value);
+
+    const LIST = [];
+    this.listService.getLists().subscribe(data => {
+      data.data.forEach(data => {
+        LIST.push(new Lists(data.attributes.title, parseInt(localStorage.getItem('uid')) , data.attributes.recipes, data.id));
+        return LIST;
+      });
+      return this.lists = LIST;
+    });
 
     const RECIPE = [];
     this.recipeService.fetchRecipe(this.recipeId).subscribe(data => {
@@ -57,7 +68,10 @@ export class RecipesDetailsComponent implements OnInit {
     this.recipe = RECIPE;
   }
 
-  saveRecipe() {
-    this.listService.addRecipe(this.recipe);
+  saveRecipe(list) {
+    this.listService.addRecipe(this.recipe, list).subscribe(data =>
+      {
+        console.log(data);
+      });
   }
 }

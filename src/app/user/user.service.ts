@@ -10,7 +10,7 @@ export class UserService {
   login(login) {
     return this.http.post("http://recipeapi.test/api/login", login);
   }
-
+  
   register(signup) {
     return this.http.post("http://recipeapi.test/api/register", signup);
   }

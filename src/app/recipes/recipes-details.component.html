@@ -11,10 +11,16 @@
         {{ item }}
       </li>
     </ul>
-    <a href="{{ recipe[0].url}}" aria-label="Go to external site for cooking instructions">Cooking instructions</a>
+    <a href="{{ recipe[0].url }}" aria-label="Go to external site for cooking instructions">Cooking instructions</a>
     <div *ngIf="loggedIn" class="section">
-      <a (click)="saveRecipe()" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-      <p class="m2">
+      <h5>Add To Your Recipe List</h5>
+      <div *ngFor="let list of lists" class="row">
+       <div class="col l4 offset-l4  m4 s6">{{ list.title }} </div> 
+       <div class="col l1 m1 s2"><a (click)="saveRecipe(list)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a></div> 
+      </div>
+
+      <div class="input-field section">
+        </div>
+      </div> 
     </div>
   </div>
-</div>

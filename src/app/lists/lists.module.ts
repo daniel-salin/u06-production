@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ListsComponent } from './lists.component';
 
 import { ListsRoutingModule } from './lists-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -10,7 +11,8 @@ import { ListsRoutingModule } from './lists-routing.module';
   declarations: [ListsComponent],
   imports: [
     CommonModule,
-    ListsRoutingModule
+    ListsRoutingModule,
+    FormsModule
   ]
 })
 export class ListsModule { }

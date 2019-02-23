@@ -11,20 +11,22 @@ export class TokenService {
 
   constructor() {}
 
-  handleToken(token) {
-    this.set(token);
+  handleToken(token, uid) {
+    this.set(token, uid);
   }
 
   get() {
     return localStorage.getItem("token");
   }
 
-  set(token) {
+  set(token, uid) {
     localStorage.setItem("token", token);
+    localStorage.setItem("uid", uid);
   }
 
   unset() {
     localStorage.removeItem("token");
+    localStorage.removeItem("uid");
   }
 
   isValid() {

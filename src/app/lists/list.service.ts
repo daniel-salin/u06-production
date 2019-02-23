@@ -1,39 +1,52 @@
 import { Injectable } from "@angular/core";
 import { Lists } from "./list.model";
 import { Recipes } from "../recipes/recipe.model";
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: "root"
 })
 export class ListService {
   list: Lists[];
+  listTitle: string = "My List";
   recipes: Recipes[] = [];
-  constructor() {}
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': localStorage.getItem('token'),
+    })};
+  
+  constructor(private http: HttpClient) {}
 
-  getListContent() {
-    return this.list;
+  getLists() {
+    const uid = parseInt(localStorage.getItem('uid'));
+    return this.http.get<any>(`http://recipeapi.test/api/user/${uid}/lists`, this.httpOptions);
   }
 
-  /**
-   * This methods store the recipe objects so that they can be referenced
-   * when retriving lists without making a new API-request for each
-   * individual recipe.
-   */
-
-  addRecipe(recipe) {
-    const RECIPES = [];
+  createList(listTitle) {
+    listTitle = (listTitle === undefined) ? listTitle = "My Recipe List" : listTitle;
     const LIST = [];
-    if (this.recipes.includes(recipe)) {
-      alert("already added this recipe");
-    } else {
-      this.recipes.push(recipe);
-    }
-    this.recipes.forEach(element => {
-      RECIPES.push({ title: element[0].title, id: element[0].id.id });
-    });
-
-    LIST.push(new Lists("My List of Recipes", RECIPES));
-
-    this.list = LIST;
+    const uid = parseInt(localStorage.getItem('uid'));
+    LIST.push(new Lists(listTitle, uid, null));
+    return this.http.post<any>("http://recipeapi.test/api/list", LIST[0], this.httpOptions);
   }
+
+  deleteList(listId) {
+    console.log(listId);
+    return this.http.delete<any>(`http://recipeapi.test/api/list/`, this.httpOptions);
+  }
+
+
+  addRecipe(recipe, list) {
+    const RECIPES = [];
+    RECIPES.push({ title: recipe[0].title, id: recipe[0].id.id });
+    RECIPES.forEach(recipe =>
+      {
+      list.recipes.push(recipe);
+    });
+    return this.http.put<any>(`http://recipeapi.test/api/list/${list.id}`, list, this.httpOptions)
+    };
+  
 }

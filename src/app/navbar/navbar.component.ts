@@ -22,7 +22,6 @@ public loggedIn: boolean;
   logout() {
     this.authService.changeStatus(false);
     this.tokenService.unset();
-    console.log(localStorage);
   }
 
 }
