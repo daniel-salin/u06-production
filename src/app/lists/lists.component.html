@@ -1,28 +1,31 @@
 <div class="progress">
-    <div class="indeterminate"></div>
-  </div>
+  <div class="indeterminate"></div>
+</div>
 <div class="container">
-    <h4>My Recipe Lists</h4>
-    <div class="row">
-      <input type="text" [(ngModel)]="listTitle">
-      <button class="btn" (click)="onSubmit()">New List</button>
-    </div>
-    <div class="row">
-        <div *ngFor="let list of lists" class="card col s12 m6 l6">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">{{ list.title }}</span><a (click)="deleteList(list.id)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
-            </div>
-            <div class="card-panel">
-              <ul>
-                <li *ngFor="let recipe of list.recipes">
-                  Title: {{ recipe.title }} Id: {{ recipe.id }}
-                </li>
-              </ul>
-            </div>
-          </div>
+  <h4>My Recipe Lists</h4>
+  <div class="row">
+    <input type="text" [(ngModel)]="listTitle">
+    <button class="btn" (click)="onSubmit()">New List</button>
+  </div>
+  <div class="row">
+    <div *ngFor="let list of lists" class="card col s12 m6 l6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">{{ list.title }}</span><a (click)="deleteList(list.id)" class="btn-floating btn-small waves-effect waves-light red"><i
+              class="material-icons">delete</i></a>
         </div>
-      </div>  
+        <div class="card-panel">
+          <ul>
+            <li *ngFor="let recipe of list.recipes">
+              <a [routerLink]="['/recipe', recipe.id]" routerLinkActive="active">{{ recipe.title }}</a>
+              <a (click)="removeRecipe(list, recipe.id)" class="btn-floating btn-small waves-effect waves-light red"><i
+                  class="material-icons">delete</i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

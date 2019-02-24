@@ -34,18 +34,27 @@ export class ListService {
   }
 
   deleteList(listId) {
-    console.log(listId);
-    return this.http.delete<any>(`http://recipeapi.test/api/list/`, this.httpOptions);
+    return this.http.delete<any>(`http://recipeapi.test/api/list/${listId}`, this.httpOptions);
   }
 
+  deleteRecipe(list, recipeId) {
+    const updatedList = list.recipes.filter(recipe => recipe.id != recipeId);
+    list.recipes = [];
+    updatedList.forEach(recipe =>
+      {
+        list.recipes.push(recipe);
+      });
+      return this.http.put<any>(`http://recipeapi.test/api/list/${list.id}`, list, this.httpOptions);  
+  };
 
   addRecipe(recipe, list) {
+    (list.recipes === null) ? list.recipes = [] : list.recipes;
     const RECIPES = [];
     RECIPES.push({ title: recipe[0].title, id: recipe[0].id.id });
     RECIPES.forEach(recipe =>
       {
-      list.recipes.push(recipe);
-    });
+        list.recipes.push(recipe);
+      });
     return this.http.put<any>(`http://recipeapi.test/api/list/${list.id}`, list, this.httpOptions)
     };
   

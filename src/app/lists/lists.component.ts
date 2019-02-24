@@ -33,14 +33,20 @@ export class ListsComponent implements OnInit {
         );
         return LIST;
       });
-      return (this.lists = LIST);
     });
+    return (this.lists = LIST);
   }
 
   deleteList(listId) {
     $(".progress").show();
     this.listService.deleteList(listId).subscribe(response => {
       $(".progress").hide();
+      this.getLists();
+    });
+  }
+
+  removeRecipe(list, recipeId) {
+    this.listService.deleteRecipe(list, recipeId).subscribe(response => {
       this.getLists();
     });
   }
