@@ -1,6 +1,6 @@
 <h1>u06-recipe-app-frontend - Daniel Salin</h1>
 
-Live version available at: <a href="#">N/A </a>
+Live version available at: <a href="http://recipe-app.danielsalin.chas.academy">http://recipe-app.danielsalin.chas.academy</a>
 Temporary production-build up at: <a href="https://daniel-salin.github.io/u06-production/recipe">Github Pages</a>
 
 Git Remote for Project: https://github.com/chas-academy/06-recipe-app-frontend-daniel-salin.git

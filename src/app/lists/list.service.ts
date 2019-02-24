@@ -15,26 +15,27 @@ export class ListService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': localStorage.getItem('token'),
+      'Authorization': `Bearer {${localStorage.getItem('token')}}`,
     })};
   
   constructor(private http: HttpClient) {}
 
   getLists() {
     const uid = parseInt(localStorage.getItem('uid'));
-    return this.http.get<any>(`http://recipeapi.test/api/user/${uid}/lists`, this.httpOptions);
+    return this.http.get<any>(`http://recipe-api.danielsalin.chas.academy/api/user/${uid}/lists`, this.httpOptions);
   }
+  
 
   createList(listTitle) {
     listTitle = (listTitle === undefined) ? listTitle = "My Recipe List" : listTitle;
     const LIST = [];
     const uid = parseInt(localStorage.getItem('uid'));
     LIST.push(new Lists(listTitle, uid, null));
-    return this.http.post<any>("http://recipeapi.test/api/list", LIST[0], this.httpOptions);
+    return this.http.post<any>("http://recipe-api.danielsalin.chas.academy/api/list", LIST[0], this.httpOptions);
   }
 
   deleteList(listId) {
-    return this.http.delete<any>(`http://recipeapi.test/api/list/${listId}`, this.httpOptions);
+    return this.http.delete<any>(`http://recipe-api.danielsalin.chas.academy/api/list/${listId}`, this.httpOptions);
   }
 
   deleteRecipe(list, recipeId) {
@@ -44,7 +45,7 @@ export class ListService {
       {
         list.recipes.push(recipe);
       });
-      return this.http.put<any>(`http://recipeapi.test/api/list/${list.id}`, list, this.httpOptions);  
+      return this.http.put<any>(`http://recipe-api.danielsalin.chas.academy/api/list/${list.id}`, list, this.httpOptions);  
   };
 
   addRecipe(recipe, list) {
@@ -55,7 +56,7 @@ export class ListService {
       {
         list.recipes.push(recipe);
       });
-    return this.http.put<any>(`http://recipeapi.test/api/list/${list.id}`, list, this.httpOptions)
+    return this.http.put<any>(`http://recipe-api.danielsalin.chas.academy/api/list/${list.id}`, list, this.httpOptions)
     };
   
 }

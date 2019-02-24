@@ -13,7 +13,7 @@
     "e2e": "ng e2e",
     "gitRemoteSetPublish": "git remote set-url origin https://github.com/daniel-salin/u06-production.git",
     "gitRemoteRestore": "git remote set-url origin https://github.com/chas-academy/06-recipe-app-frontend-daniel-salin.git",
-    "tbuild": "ng build --prod --base-href 'https://daniel-salin.github.io/u06-production/recipe'",
+    "tbuild": "ng build --prod --base-href 'http://recipe-app.danielsalin.chas.academy/'",
     "tdeploy": "ngh --dir dist/recipe-app"
     
   },
